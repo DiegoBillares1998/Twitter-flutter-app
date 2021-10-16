@@ -63,11 +63,38 @@ class _SignUpState extends State<SignUp> {
                   password = val;
                 }),
               ),
+              Padding(padding: const EdgeInsets.only(top: 200.0)),
               ElevatedButton(
                   child: Text('Signup'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.redAccent, //background color of button
+                    side: BorderSide(
+                        width: 3, color: Colors.brown), //border width and color
+                    elevation: 3, //elevation of button
+                    shape: RoundedRectangleBorder(
+                        //to set border radius to button
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 18,
+                        horizontal: 133), //content padding inside button
+                  ),
                   onPressed: () async => {SignUpAction()}),
+              Padding(padding: const EdgeInsets.only(top: 20.0)),
               ElevatedButton(
                   child: Text('Signin'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.redAccent, //background color of button
+                      side: BorderSide(
+                          width: 3,
+                          color: Colors.brown), //border width and color
+                      elevation: 3, //elevation of button
+                      shape: RoundedRectangleBorder(
+                          //to set border radius to button
+                          borderRadius: BorderRadius.circular(30)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 18,
+                          horizontal: 135) //content padding inside button
+                      ),
                   onPressed: () async => {SignInAction()}),
             ],
           )),
