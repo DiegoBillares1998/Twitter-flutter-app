@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "910049611260",
+    "project_id": "twitter-app-279a0",
+    "storage_bucket": "twitter-app-279a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910049611260:android:09ec866240699d25493679",
+        "android_client_info": {
+          "package_name": "com.example.twitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910049611260-3t2sbkb5n0jop429lv5n40qmju4ub9u4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.twitter",
+            "certificate_hash": "c279baa4994efa8c70db5c8b1afd9f27822c5e64"
+          }
+        },
+        {
+          "client_id": "910049611260-q6f7fkn91m782su2891m887m8fbmljvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9PtLIoiyBjp_Hl8mFARDLdMcHTbmBXys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910049611260-q6f7fkn91m782su2891m887m8fbmljvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
