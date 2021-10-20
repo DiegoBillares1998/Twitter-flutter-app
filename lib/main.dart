@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:twitter/auth/singUp.dart';
+import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:twitter/models/user.dart';
+import 'package:twitter/screens/wrapper.dart';
+import 'package:twitter/services/auth.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +26,10 @@ class MyApp extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            title: 'Flutter Demo',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: SignUp(),
+          return StreamProvider<UserModel>.value(
+            value: AuthService().user,
+            initialData: new UserModel(id: "0"),
+            child: MaterialApp(home: Wrapper()),
           );
         }
 
