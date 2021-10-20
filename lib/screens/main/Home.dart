@@ -10,29 +10,28 @@ class Home extends StatelessWidget {
     final AuthService _authService = AuthService();
     return Scaffold(
         appBar: AppBar(
+            iconTheme: IconThemeData(color: Colors.grey),
             backgroundColor: Colors.white,
             centerTitle: true,
             title: Icon(EvaIcons.twitter, color: Colors.blue)),
-        body: Center(
-            child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          TextButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.redAccent, //background color of button
-              side: BorderSide(
-                  width: 3, color: Colors.brown), //border width and color
-              elevation: 3, //elevation of button
-              shape: RoundedRectangleBorder(
-                  //to set border radius to button
-                  borderRadius: BorderRadius.circular(30)),
-              padding: const EdgeInsets.symmetric(
-                  vertical: 18,
-                  horizontal: 133), //content padding inside button
-            ),
+        floatingActionButton: FloatingActionButton(
             onPressed: () {
-              _authService.signOut();
+              Navigator.pushNamed(context, '/add');
             },
-            child: const Text('SignOut'),
-          ),
-        ])));
+            child: Icon(Icons.add)),
+        drawer: Drawer(
+          child: ListView(children: <Widget>[
+            DrawerHeader(
+              child: Icon(EvaIcons.twitter, color: Colors.blue, size: 50),
+              decoration: BoxDecoration(color: Colors.white),
+            ),
+            ListTile(
+              title: Text('Logout'),
+              onTap: () async {
+                _authService.signOut();
+              },
+            ),
+          ]),
+        ));
   }
 }
