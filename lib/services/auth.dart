@@ -1,21 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:twitter/models/user.dart';
 
 class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  UserModel? _userFromFirebaseUser(User user) {
-    return user != null ? UserModel(id: user.uid) : null;
+  UserModel? _userFromFirebaseUser(UserModel? user) {
+    return user != null
+        ? UserModel(
+            id: user.id,
+            name: user.name,
+            birthDay: user.birthDay,
+            password: user.password)
+        : null;
   }
 
   Stream<UserModel> get user {
     return auth
         .authStateChanges()
-        .map((user) => _userFromFirebaseUser(user as User) as UserModel);
+        .map((user) => _userFromFirebaseUser(user as UserModel) as UserModel);
   }
 
   Future SignIn(email, password) async {
-    try {
+    /*try {
       User user = await auth.createUserWithEmailAndPassword(
           email: email, password: password) as User;
       _userFromFirebaseUser(user);
@@ -27,14 +34,26 @@ class AuthService {
       }
     } catch (e) {
       print(e);
-    }
+    }*/
   }
 
-  Future SignUp(email, password) async {
+  Future CreateAccount(name, emailOrPhoneNumber, birthDay, password) async {
     try {
-      User user = (await auth.signInWithEmailAndPassword(
-          email: email, password: password)) as User;
-      _userFromFirebaseUser(user);
+      emailOrPhoneNumber.contains('@')
+          ? await FirebaseFirestore.instance.collection('users').doc().set({
+              'name': name,
+              'email': emailOrPhoneNumber,
+              'phoneNumber': '',
+              'birthDay': birthDay,
+              'password': password
+            })
+          : await FirebaseFirestore.instance.collection('users').doc().set({
+              'name': name,
+              'email': '',
+              'phoneNumber': emailOrPhoneNumber,
+              'birthDay': birthDay,
+              'password': password
+            });
     } on FirebaseAuthException catch (e) {
       print(e);
     } catch (e) {
