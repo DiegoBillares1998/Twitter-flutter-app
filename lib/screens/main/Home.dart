@@ -32,6 +32,19 @@ class _HomeState extends State<Home> {
             iconTheme: IconThemeData(color: Colors.grey),
             backgroundColor: Colors.white,
             centerTitle: true,
+            actions: <Widget>[
+              TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.white,
+                    onSurface: Colors.white,
+                  ),
+                  onPressed: () {},
+                  child: Icon(
+                    Icons.star_border_purple500,
+                    color: Colors.blue,
+                  ))
+            ],
             title: Icon(EvaIcons.twitter, color: Colors.blue)),
         floatingActionButton: FloatingActionButton(
             onPressed: () {

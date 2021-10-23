@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter/models/posts.dart';
@@ -58,12 +59,26 @@ class _FeedState extends State<Feed> {
                                                 TextStyle(color: Colors.grey)),
                                       ])),
                                       Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10, horizontal: 0),
                                           child: Text(
-                                            item.text,
-                                          ))
-                                    ]))
+                                        item.text,
+                                      )),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Icon(EvaIcons.messageCircleOutline),
+                                            Text(item.comments),
+                                            Text('            '),
+                                            Icon(EvaIcons.repeatOutline),
+                                            Text(item.reTweets),
+                                            Text('            '),
+                                            Icon(EvaIcons.heartOutline),
+                                            Text(item.likes),
+                                            Text('            '),
+                                            Icon(Icons.file_upload_outlined)
+                                          ],
+                                        ),
+                                      ),
+                                    ])),
                               ],
                             )),
                       ],

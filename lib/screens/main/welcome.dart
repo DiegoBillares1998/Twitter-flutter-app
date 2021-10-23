@@ -10,10 +10,6 @@ class Welcome extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.blue),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
             backgroundColor: Colors.black,
             centerTitle: true,
             title: Icon(EvaIcons.twitter, color: Colors.blue)),
