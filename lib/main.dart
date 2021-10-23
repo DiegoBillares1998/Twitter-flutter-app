@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:twitter/models/user.dart';
+import 'package:twitter/models/userlog.dart';
 import 'package:twitter/screens/wrapper.dart';
 import 'package:twitter/services/auth.dart';
 
@@ -26,10 +27,9 @@ class MyApp extends StatelessWidget {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return StreamProvider<UserModel>.value(
+          return StreamProvider<UserLog?>.value(
             value: AuthService().user,
-            initialData:
-                new UserModel(id: '', name: '', birthDay: '', password: ''),
+            initialData: null,
             child: MaterialApp(home: Wrapper()),
           );
         }

@@ -2,13 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostModel {
   final String id;
-  final String creator;
+  final String email;
+  final String image;
+  final String time;
   final String text;
-  final Timestamp timestamp;
+  final String comments;
+  final String reTweets;
+  final String likes;
 
   PostModel(
       {required this.id,
-      required this.creator,
+      required this.email,
+      required this.image,
+      required this.time,
       required this.text,
-      required this.timestamp});
+      required this.comments,
+      required this.reTweets,
+      required this.likes});
 }

@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:twitter/models/user.dart';
+import 'package:twitter/services/auth.dart';
 
 class UserService {
   UserModel? _userFromFirebaseSnapshot(DocumentSnapshot snapshot) {

@@ -1,30 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:twitter/models/user.dart';
+import 'package:twitter/models/userlog.dart';
 
 class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
+  LocalStorage storage = new LocalStorage('username');
 
-  UserModel? _userFromFirebaseUser(UserModel? user) {
-    return user != null
-        ? UserModel(
-            id: user.id,
-            name: user.name,
-            birthDay: user.birthDay,
-            password: user.password)
-        : null;
+  void saveUserName(String username) {
+    storage.setItem('username', username);
   }
 
-  Stream<UserModel> get user {
+  UserLog? _userFromFirebaseUser(User user) {
+    return user != null ? UserLog(id: user.uid) : null;
+  }
+
+  Stream<UserLog> get user {
     return auth
         .authStateChanges()
-        .map((user) => _userFromFirebaseUser(user as UserModel) as UserModel);
+        .map((user) => _userFromFirebaseUser(user as User) as UserLog);
   }
 
-  Future SignIn(email, password) async {
-    /*try {
-      User user = await auth.createUserWithEmailAndPassword(
-          email: email, password: password) as User;
+  Future SignIn(password) async {
+    try {
+      User user = null as User;
+      storage.getItem('username').contains('@')
+          ? user = await auth.signInWithEmailAndPassword(
+              email: storage.getItem('username'), password: password) as User
+          : user = await auth.signInWithEmailAndPassword(
+              email: storage.getItem('username') + "@mail.com",
+              password: password) as User;
       _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -34,7 +41,7 @@ class AuthService {
       }
     } catch (e) {
       print(e);
-    }*/
+    }
   }
 
   Future CreateAccount(name, emailOrPhoneNumber, birthDay, password) async {
@@ -54,6 +61,11 @@ class AuthService {
               'birthDay': birthDay,
               'password': password
             });
+      !emailOrPhoneNumber.contains('@')
+          ? await auth.createUserWithEmailAndPassword(
+              email: emailOrPhoneNumber + "@mail.com", password: password)
+          : await auth.createUserWithEmailAndPassword(
+              email: emailOrPhoneNumber, password: password);
     } on FirebaseAuthException catch (e) {
       print(e);
     } catch (e) {
